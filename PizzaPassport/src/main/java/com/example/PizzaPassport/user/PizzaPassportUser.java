@@ -1,30 +1,38 @@
 package com.example.PizzaPassport.user;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
-public class User {
+@Entity
+@Table
+public class PizzaPassportUser {
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+  @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", allocationSize = 1)
+
   private Long id;
   private String name;
   private String email;
   private LocalDate birthday;
+  @Transient
   private Integer age;
 
-  public User(){}
+  public PizzaPassportUser() {
+  }
 
-  public User(Long id, String name, String email, LocalDate birthday, Integer age) {
+  public PizzaPassportUser(Long id, String name, String email, LocalDate birthday) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.birthday = birthday;
-    this.age = age;
   }
 
-//  public User(String name, String email, LocalDate birthday, Integer age) {
-//    this.name = name;
-//    this.email = email;
-//    this.birthday = birthday;
-//    this.age = age;
-//  }
+  public PizzaPassportUser(String name, String email, LocalDate birthday) {
+    this.name = name;
+    this.email = email;
+    this.birthday = birthday;
+  }
 
   public Long getId() {
     return id;
@@ -59,7 +67,7 @@ public class User {
   }
 
   public Integer getAge() {
-    return age;
+    return Period.between(this.birthday, LocalDate.now()).getYears();
   }
 
   public void setAge(Integer age) {
@@ -68,12 +76,6 @@ public class User {
 
   @Override
   public String toString() {
-    return "User{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", email='" + email + '\'' +
-            ", birthday=" + birthday +
-            ", age=" + age +
-            '}';
+    return super.toString();
   }
 }
