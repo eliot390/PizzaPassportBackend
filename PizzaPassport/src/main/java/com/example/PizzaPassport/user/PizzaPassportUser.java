@@ -3,6 +3,7 @@ package com.example.PizzaPassport.user;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Entity
 @Table
@@ -15,23 +16,30 @@ public class PizzaPassportUser {
   private String name;
   private String email;
   private LocalDate birthday;
-  @Transient
-  private Integer age;
+  private String favoriteRestaurant;
+  private String favoritePizza;
+  private List<String> visitedRestaurantList;
 
   public PizzaPassportUser() {
   }
 
-  public PizzaPassportUser(Long id, String name, String email, LocalDate birthday) {
+  public PizzaPassportUser(Long id, String name, String email, LocalDate birthday, String favoriteRestaurant, String favoritePizza, List<String> visitedRestaurantList) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.birthday = birthday;
+    this.favoriteRestaurant = favoriteRestaurant;
+    this.favoritePizza = favoritePizza;
+    this.visitedRestaurantList = visitedRestaurantList;
   }
 
-  public PizzaPassportUser(String name, String email, LocalDate birthday) {
+  public PizzaPassportUser(String name, String email, LocalDate birthday, String favoriteRestaurant, String favoritePizza, List<String> visitedRestaurantList) {
     this.name = name;
     this.email = email;
     this.birthday = birthday;
+    this.favoriteRestaurant = favoriteRestaurant;
+    this.favoritePizza = favoritePizza;
+    this.visitedRestaurantList = visitedRestaurantList;
   }
 
   public Long getId() {
@@ -66,12 +74,28 @@ public class PizzaPassportUser {
     this.birthday = birthday;
   }
 
-  public Integer getAge() {
-    return Period.between(this.birthday, LocalDate.now()).getYears();
+  public String getFavoriteRestaurant() {
+    return favoriteRestaurant;
   }
 
-  public void setAge(Integer age) {
-    this.age = age;
+  public void setFavoriteRestaurant(String favoriteRestaurant) {
+    this.favoriteRestaurant = favoriteRestaurant;
+  }
+
+  public String getFavoritePizza() {
+    return favoritePizza;
+  }
+
+  public void setFavoritePizza(String favoritePizza) {
+    this.favoritePizza = favoritePizza;
+  }
+
+  public List<String> getVisitedRestaurantList() {
+    return visitedRestaurantList;
+  }
+
+  public void setVisitedRestaurantList(List<String> visitedRestaurantList) {
+    this.visitedRestaurantList = visitedRestaurantList;
   }
 
   @Override
